@@ -23,7 +23,23 @@ public class Main
 
 
         c1.insert(45, 4);
+        c1.display();
 
+
+        // delete functions
+        System.out.println();
+        c1.delete(1);
+        c1.delete(4);
+
+
+        // delete by value
+      
+
+        c1.display();
+
+        System.out.println();
+        c1.deleteByValue(60);
+        c1.deleteByValue(10);
         c1.display();
     }    
 }

@@ -117,6 +117,144 @@ public class CircularLL
 
         return true;
     }
+
+    public boolean deleteFirst()
+    {
+        if(head == null)
+        {
+            return false;
+        }
+
+        if(head.getNext() == head)
+        {
+            head = null;
+            last = null;
+            count--;
+            return true;
+        }
+        
+        head = head.getNext();
+        last.setNext(head);
+        count--;
+        return true;
+    }
+
+    public boolean deleteLast()
+    {
+        if(head == null)
+        {
+            return false;
+        }
+
+        if(head.getNext() == head)
+        {
+            count--;
+            head = null;
+            last = null;
+        }
+         Node temp = head;
+
+         while(temp.getNext().getNext() != head) 
+         {
+            temp = temp.getNext();
+         }
+         
+         last = temp;
+         last.setNext(head);
+         count--;
+         return true;
+    }
+
+    public boolean deleteAtPos(int position)
+    {
+        if(head == null)
+        {
+            return false;
+        }
+
+        if(head.getNext() == head)
+        {
+            count--;
+            head = null;
+            last = null;
+        }
+        
+        Node temp = head;
+        for(int iCnt = 1; iCnt < position - 1; iCnt++)
+        {
+            temp = temp.getNext();
+        }
+
+        temp.setNext(temp.getNext().getNext());
+        count--;
+        return true;
+    }
+
+    public boolean delete(int position)
+    {
+        if(position < 1 || position > count)
+        {
+            return false;
+        }
+
+        if(position == 1)
+        {
+            deleteFirst();
+        }
+        else if(position == count)
+        {
+            deleteLast();
+        }
+        else
+        {
+            deleteAtPos(position);
+        }
+        return true;
+    }
+
+    public boolean deleteByValue(int data)
+    {
+        if(head == null)
+        {
+            return false;
+        }
+
+        if(head.getNext() == head)
+        {
+            if(head.getData() == data)
+            {
+                count--;
+                head = null;
+                last = null;
+                return true;
+            }
+            return false;
+        }
+
+        if(head.getData() == data)
+        {
+            deleteFirst();
+            return true;
+        }
+
+        if(last.getData() == data)
+        {
+            deleteLast();
+            return true;
+        }
+
+        Node temp = head;
+        Node prev = null;
+        while(temp.getData() != data)
+        {
+            prev = temp;
+            temp = temp.getNext();
+        }
+        prev.setNext(temp.getNext());
+        count--;
+        return true;
+    }
+
     public void display()
     {
         Node temp = head;
